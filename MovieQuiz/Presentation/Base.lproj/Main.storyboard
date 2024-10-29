@@ -29,15 +29,15 @@
                                         <rect key="frame" x="0.0" y="0.0" width="374" height="23.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Вопрос:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wH4-b8-B6L" userLabel="Question title Label">
-                                                <rect key="frame" x="0.0" y="0.0" width="343.5" height="23.5"/>
+                                                <rect key="frame" x="0.0" y="0.0" width="339.5" height="23.5"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="20"/>
                                                 <color key="textColor" name="YP White"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
-                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="1/10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NeI-yo-EUF" userLabel="Counter Label">
-                                                <rect key="frame" x="343.5" y="0.0" width="30.5" height="23.5"/>
+                                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="0/10" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NeI-yo-EUF">
+                                                <rect key="frame" x="339.5" y="0.0" width="34.5" height="23.5"/>
                                                 <fontDescription key="fontDescription" name="YSDisplay-Medium" family="YS Display" pointSize="17"/>
-                                                <nil key="textColor"/>
+                                                <color key="textColor" name="YP White"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
                                         </subviews>
@@ -118,9 +118,12 @@
                         </constraints>
                     </view>
                     <connections>
-                        <outlet property="counterLabel" destination="NeI-yo-EUF" id="evc-9q-xZQ"/>
+                        <outlet property="counterLabel" destination="NeI-yo-EUF" id="XNn-IY-Oeb"/>
                         <outlet property="imageView" destination="r25-B3-gQA" id="rV1-O7-3Pe"/>
+                        <outlet property="noButton" destination="LhT-bw-US9" id="XeL-sO-aSg"/>
+                        <outlet property="questionTitle" destination="wH4-b8-B6L" id="kl6-hB-PRI"/>
                         <outlet property="textLabel" destination="bnE-EU-REt" id="USY-uy-aXP"/>
+                        <outlet property="yesButton" destination="xYK-89-BdZ" id="1fz-sK-E1c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
