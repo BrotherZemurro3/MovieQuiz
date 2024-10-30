@@ -4,44 +4,23 @@ final class MovieQuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         show(quiz: convert(model:questions[currentQuestionIndex]))
-        imageView.layer.masksToBounds = true // даём разрешение на рисование рамки
-        imageView.layer.borderColor = UIColor.white.cgColor // делаем рамку белой
-        imageView.layer.cornerRadius = 20 // радиус скругления углов рамки
+        imageView.layer.masksToBounds = true
+        imageView.layer.borderColor = UIColor.white.cgColor
+        imageView.layer.cornerRadius = 20
         
     }
     
+    // MARK: - IB Outlets
     @IBOutlet weak private var noButton: UIButton!
-    
     @IBOutlet weak private var yesButton: UIButton!
-    
     @IBOutlet weak private var textLabel: UILabel!
     @IBOutlet weak private var imageView: UIImageView!
-    
     @IBOutlet weak private var questionTitle: UILabel!
-    
     @IBOutlet weak private var counterLabel: UILabel!
     
     
-   
     
-    private struct QuizQuestion {
-        let image: String
-        let text: String
-        let correctAnswer: Bool
-    }
-    private struct QuizStepViewModel {
-        let image: UIImage
-        let question: String
-        let questionNumber: String
-    }
-    private struct QuizResultsViewModel {
-        let title: String
-        let text: String
-        let buttonText: String
-    }
-    
-    
-    // массив вопросов
+    // MARK: Private Properties
     private let questions: [QuizQuestion] = [
         QuizQuestion(
             image: "The Godfather",
@@ -85,6 +64,27 @@ final class MovieQuizViewController: UIViewController {
             correctAnswer: false)
     ]
     
+    private var currentQuestionIndex = 0
+    private var correctAnswers = 0
+
+    private struct QuizQuestion {
+        let image: String
+        let text: String
+        let correctAnswer: Bool
+    }
+    private struct QuizStepViewModel {
+        let image: UIImage
+        let question: String
+        let questionNumber: String
+    }
+    private struct QuizResultsViewModel {
+        let title: String
+        let text: String
+        let buttonText: String
+    }
+    
+    
+    // MARK: - IB Actions
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
         let currentQuestion = questions[currentQuestionIndex] // 1
         let givenAnswer = true // 2
@@ -98,27 +98,17 @@ final class MovieQuizViewController: UIViewController {
         
         showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer) // 3
     }
+    
+    // MARK: - Private Methods
     private func setupViews() {
         imageView.layer.cornerRadius = 20
         imageView.contentMode = .scaleAspectFit
     }
-    
-    
-    private var currentQuestionIndex = 0
-    private var correctAnswers = 0
-    private let alert = UIAlertController(
-        title: "Этот раунд окончен!",
-        message: "Ваш результат ???",
-        preferredStyle: .alert)
-
-    
-    
     private func show(quiz step: QuizStepViewModel) {
         imageView.image = step.image
         textLabel.text = step.question
         counterLabel.text = step.questionNumber
     }
-    
     private func showAnswerResult(isCorrect: Bool) {
         changeStateButton(isEnabled: false)
         if isCorrect {
@@ -132,7 +122,6 @@ final class MovieQuizViewController: UIViewController {
             self.showNextQuestionOrResults()
         }
     }
-    
     private func showNextQuestionOrResults() {
         changeStateButton(isEnabled: true)
         if currentQuestionIndex == questions.count - 1 {
