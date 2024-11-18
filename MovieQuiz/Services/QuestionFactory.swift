@@ -10,10 +10,12 @@ import UIKit
 
 
 class QuestionFactory: QuestionFactoryProtocol {
+    
     weak var delegate: QuestionFactoryDelegate?
-    func setup(delegate:QuestionFactoryDelegate) {
-        self.delegate = delegate
+   init(delegate: QuestionFactoryDelegate) {
+       self.delegate = delegate
     }
+    
     
     func requestNextQuestion() {
         guard let index = (0..<questions.count).randomElement() else {
