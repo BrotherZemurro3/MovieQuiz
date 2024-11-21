@@ -7,6 +7,7 @@
 import Foundation
 import UIKit
 
+// MARK: - QuestionFactoryDelegateProtocol
 protocol QuestionFactoryDelegate: AnyObject {
     func didReceiveNextQuestion(question: QuizQuestion?)
     

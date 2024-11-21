@@ -7,6 +7,7 @@
 import Foundation
 import UIKit
 
+// MARK: - QuizStepViewModel
 
  struct QuizStepViewModel {
     let image: UIImage

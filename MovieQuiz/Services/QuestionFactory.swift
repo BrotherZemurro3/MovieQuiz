@@ -7,25 +7,18 @@
 import Foundation
 import UIKit
 
-
+// MARK: - QuestionFactory
 
 class QuestionFactory: QuestionFactoryProtocol {
     
     weak var delegate: QuestionFactoryDelegate?
+    
+// MARK: - QuestionFactoryInitializer
    init(delegate: QuestionFactoryDelegate) {
        self.delegate = delegate
     }
-    
-    
-    func requestNextQuestion() {
-        guard let index = (0..<questions.count).randomElement() else {
-            delegate?.didReceiveNextQuestion(question: nil)
-            return
-        }
-        let question = questions[safe: index]
-        delegate?.didReceiveNextQuestion(question: question
-        )
-    }
+
+// MARK: - ArrayOfQuizQuestions
     let questions: [QuizQuestion] = [
         
        QuizQuestion(
@@ -69,7 +62,17 @@ class QuestionFactory: QuestionFactoryProtocol {
            text: "Рейтинг данного фильма больше чем 6?",
            correctAnswer: false)
    ]
-
+    
+    // MARK: - requestNextQuestion
+    func requestNextQuestion() {
+        guard let index = (0..<questions.count).randomElement() else {
+            delegate?.didReceiveNextQuestion(question: nil)
+            return
+        }
+        let question = questions[safe: index]
+        delegate?.didReceiveNextQuestion(question: question
+        )
+    }
 
     
      

@@ -7,6 +7,9 @@
 
 import UIKit
 
+
+// MARK: - QuizQuestion
+
 struct QuizQuestion {
     let image: String
     let text: String
