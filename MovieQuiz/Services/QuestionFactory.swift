@@ -9,7 +9,7 @@ import UIKit
 
 // MARK: - QuestionFactory
 
-class QuestionFactory: QuestionFactoryProtocol {
+public class QuestionFactory: QuestionFactoryProtocol {
     
     weak var delegate: QuestionFactoryDelegate?
     
