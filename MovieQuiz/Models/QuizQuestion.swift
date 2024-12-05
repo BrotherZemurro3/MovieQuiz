@@ -16,7 +16,6 @@ struct QuizQuestion {
     let text: String
     let correctAnswer: Bool
 }
-let imageData = try Data(contentsOf: imageURL )
-let image = UIImage(data: imageData)
+
 
 
