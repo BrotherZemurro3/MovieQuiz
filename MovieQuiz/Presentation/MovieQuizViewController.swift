@@ -54,7 +54,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private var currentQuestion: QuizQuestion?
     private var statisticService = StatisticService()
     private var alertPresenter: AlertPresenter?
-  
+    
     
     
     
@@ -107,23 +107,23 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         imageView.layer.borderColor = UIColor.clear.cgColor
         changeStateButton(isEnabled: true)
         if currentQuestionIndex == questionsAmount - 1 {
-                   statisticService.store(correct: correctAnswers, total: questionsAmount)
-                   let alertModel = AlertModel(
-                    tittle: "Этот раунд окончен!",
-                       message: correctAnswers == questionsAmount ? "Поздравляем, Вы ответили на 10 из 10!" :  "Ваш результат \(correctAnswers)/\(questionsAmount)\nКоличество сыгранных квизов: \(statisticService.gamesCount)\nРекорд: \(statisticService.bestGame.correct)/\(statisticService.bestGame.total) (\(statisticService.bestGame.date.dateTimeString))\nСредняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%",
-                       buttonText: "Попробовать ещё раз",
-                       completion: {[weak self] in
-                           self?.currentQuestionIndex = 0
-                           self?.correctAnswers = 0
-                           self?.questionFactory?.requestNextQuestion()
-                       })
-                   
+            statisticService.store(correct: correctAnswers, total: questionsAmount)
+            let alertModel = AlertModel(
+                tittle: "Этот раунд окончен!",
+                message: correctAnswers == questionsAmount ? "Поздравляем, Вы ответили на 10 из 10!" :  "Ваш результат \(correctAnswers)/\(questionsAmount)\nКоличество сыгранных квизов: \(statisticService.gamesCount)\nРекорд: \(statisticService.bestGame.correct)/\(statisticService.bestGame.total) (\(statisticService.bestGame.date.dateTimeString))\nСредняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%",
+                buttonText: "Попробовать ещё раз",
+                completion: {[weak self] in
+                    self?.currentQuestionIndex = 0
+                    self?.correctAnswers = 0
+                    self?.questionFactory?.requestNextQuestion()
+                })
+            
             alertPresenter?.showAlert(model: alertModel)
-               } else {
-                   currentQuestionIndex += 1
-                   
+        } else {
+            currentQuestionIndex += 1
+            
             self.questionFactory?.requestNextQuestion()
-           
+            
         }
     }
     
@@ -143,13 +143,16 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private func showNetworkError(message: String) {
         activityIndicator.isHidden = true
         
-        
-        let networkAlertModel = AlertModel(tittle: "Ошибка", message: "Не удалось получить данные", buttonText: "Повторить?", completion: {[weak self] in
+        let model = AlertModel(tittle: "Ошибка",
+                               message: "Не удалось получить данные с сервера",
+                               buttonText: "Повторить?") { [weak self] in
             guard let self = self else {return}
             self.currentQuestionIndex = 0
             self.correctAnswers = 0
+            
             self.questionFactory?.requestNextQuestion()
-        })
+        }
+        alertPresenter?.showAlert(model: model)
     }
     
     func didLoadDataFromServer() {
@@ -159,15 +162,15 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     }
     
     func didFailToLoadData(with error: Error) {
-        showNetworkError(message: error.localizedDescription) // возьмем в качестве сообщения описание ошибки
+        activityIndicator.isHidden = false
+        let errorMessage  = (error as NSError).localizedDescription
+        showNetworkError(message: errorMessage)
+        
     }
-// MARK: - changeStateButton
+    // MARK: - changeStateButton
     private func changeStateButton(isEnabled: Bool) {
         noButton.isEnabled = isEnabled
         yesButton.isEnabled = isEnabled
     }
     
 }
-
-
-

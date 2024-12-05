@@ -9,9 +9,10 @@ import UIKit
 
 // MARK: - QuestionFactory
 
-public class QuestionFactory: QuestionFactoryProtocol {
+final class QuestionFactory: QuestionFactoryProtocol {
     private let moviesLoader: MoviesLoading
     private weak var delegate: QuestionFactoryDelegate?
+    private var movies: [MostPopularMovie] = []
     
     // MARK: - QuestionFactoryInitializer
     init(moviesLoader: MoviesLoading, delegate: QuestionFactoryDelegate?){
@@ -65,7 +66,7 @@ public class QuestionFactory: QuestionFactoryProtocol {
      ]
      */
     
-    private var movies: [MostPopularMovie] = []
+    
     
     func loadData() {
         moviesLoader.loadMovies { [weak self] result in
@@ -81,7 +82,7 @@ public class QuestionFactory: QuestionFactoryProtocol {
             }
         }
     }
-        // MARK: - requestNextQuestion
+    // MARK: - requestNextQuestion
     func requestNextQuestion() {
         DispatchQueue.global().async { [weak self] in
             guard let self = self else { return }
@@ -90,9 +91,9 @@ public class QuestionFactory: QuestionFactoryProtocol {
             guard let movie = self.movies[safe: index] else { return }
             
             var imageData = Data()
-           
-           do {
-               imageData = try Data(contentsOf: movie.resizedImageURL)
+            
+            do {
+                imageData = try Data(contentsOf: movie.resizedImageURL)
             } catch {
                 print("Failed to load image")
             }
@@ -103,8 +104,8 @@ public class QuestionFactory: QuestionFactoryProtocol {
             let correctAnswer = rating > 7
             
             let question = QuizQuestion(image: imageData,
-                                         text: text,
-                                         correctAnswer: correctAnswer)
+                                        text: text,
+                                        correctAnswer: correctAnswer)
             
             DispatchQueue.main.async { [weak self] in
                 guard let self = self else { return }
@@ -112,5 +113,5 @@ public class QuestionFactory: QuestionFactoryProtocol {
             }
         }
     }
-    }
+}
 

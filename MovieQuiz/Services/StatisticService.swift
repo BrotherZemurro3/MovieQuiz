@@ -10,7 +10,7 @@ import Foundation
 
 // MARK: - StatisticService&&Keys
 final class StatisticService: StatisticServiceProtocol {
-        private enum Keys: String {
+    private enum Keys: String {
         case correct
         case totalBest
         case gamesCount
