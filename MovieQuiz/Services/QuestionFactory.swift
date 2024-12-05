@@ -10,16 +10,17 @@ import UIKit
 // MARK: - QuestionFactory
 
 public class QuestionFactory: QuestionFactoryProtocol {
-    
-    weak var delegate: QuestionFactoryDelegate?
+    private let moviesLoader: MoviesLoading
+    private weak var delegate: QuestionFactoryDelegate?
     
 // MARK: - QuestionFactoryInitializer
-   init(delegate: QuestionFactoryDelegate) {
-       self.delegate = delegate
+    init(moviesLoader: MoviesLoading, delegate: QuestionFactoryDelegate?){
+        self.moviesLoader = moviesLoader
+        self.delegate = delegate
     }
 
 // MARK: - ArrayOfQuizQuestions
-    let questions: [QuizQuestion] = [
+ /*   let questions: [QuizQuestion] = [
         
        QuizQuestion(
            image: "The Godfather",
@@ -62,7 +63,21 @@ public class QuestionFactory: QuestionFactoryProtocol {
            text: "Рейтинг данного фильма больше чем 6?",
            correctAnswer: false)
    ]
+    */
     
+    private var movies: [MostPopularMovies] = []
+    
+    func loadData() {
+        moviesLoader.loadMovies { [weak self] result in
+            guard let self = self else {return}
+            switch result {
+            case .success(let mostPopularMovies):
+                self.movies = mostPopularMovies.items // сохраняем фильм в нашу новую переменную
+                self.delegate?.didLoadDataFromServer() // сообщаем, что данные загрузились
+            case .failure(let error):
+                self.delegate?.didFailToLoadData(with: error) // сообщаем об ошибке нашему MovieQuizViewController
+            }
+    }
     // MARK: - requestNextQuestion
     func requestNextQuestion() {
         guard let index = (0..<questions.count).randomElement() else {

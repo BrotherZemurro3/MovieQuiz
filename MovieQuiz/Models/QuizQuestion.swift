@@ -6,12 +6,17 @@
 //
 
 import UIKit
+import Foundation
 
 
 // MARK: - QuizQuestion
 
 struct QuizQuestion {
-    let image: String
+    let image: Data
     let text: String
     let correctAnswer: Bool
 }
+let imageData = try Data(contentsOf: imageURL )
+let image = UIImage(data: imageData)
+
+

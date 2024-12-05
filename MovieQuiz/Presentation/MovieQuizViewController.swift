@@ -41,7 +41,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var questionTitle: UILabel!
     @IBOutlet weak private var counterLabel: UILabel!
-    
+    @IBOutlet weak private var activityIndicator: UIActivityIndicatorView!
     
     
     // MARK: Private Properties
@@ -127,12 +127,38 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
         let questionStep = QuizStepViewModel(
-            image: UIImage(named: model.image) ?? UIImage(),
+            image: UIImage(data: model.image) ?? UIImage(),
             question: model.text,
             questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
         return questionStep
     }
     
+    private func showLoadingIndicator() {
+        activityIndicator.isHidden = false // говорим, что индикатор загрузки не скрыт
+        activityIndicator.startAnimating() // включаем анимацию
+    }
+    
+    private func showNetworkError(message: String) {
+        activityIndicator.isHidden = true
+        
+        
+        let networkAlertModel = AlertModel(tittle: "Ошибка", message: "Не удалось получить данные", buttonText: "Повторить?", completion: {[weak self] in
+            guard let self = self else {return}
+            self.currentQuestionIndex = 0
+            self.correctAnswers = 0
+            self.questionFactory?.requestNextQuestion()
+        })
+    }
+    
+    func didLoadDataFromServer() {
+        activityIndicator.isHidden = true
+        questionFactory?.requestNextQuestion()
+        
+    }
+    
+    func didFailToLoadData(with error: Error) {
+        showNetworkError(message: error.localizedDescription) // возьмем в качестве сообщения описание ошибки
+    }
 // MARK: - changeStateButton
     private func changeStateButton(isEnabled: Bool) {
         noButton.isEnabled = isEnabled
