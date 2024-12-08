@@ -3,11 +3,12 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 55;
+	objectVersion = 70;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		3A079EB22D00E5B90035422D /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A079EB12D00E5B00035422D /* NetworkClient.swift */; };
+		3A17F8512D04864000304FE2 /* NetWorkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A17F8502D04863600304FE2 /* NetWorkProtocol.swift */; };
 		3A23F6782CC1158C00975F70 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F6772CC1158C00975F70 /* YS Display-Medium.ttf */; };
 		3A23F6792CC1158C00975F70 /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F6762CC1158C00975F70 /* YS Display-Bold.ttf */; };
 		3A61A4EF2CEB527D00C109A0 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61A4EE2CEB527900C109A0 /* AlertModel.swift */; };
@@ -36,6 +37,7 @@
 
 /* Begin PBXFileReference section */
 		3A079EB12D00E5B00035422D /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		3A17F8502D04863600304FE2 /* NetWorkProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkProtocol.swift; sourceTree = "<group>"; };
 		3A23F6762CC1158C00975F70 /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
 		3A23F6772CC1158C00975F70 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
 		3A61A4EE2CEB527900C109A0 /* AlertModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AlertModel.swift; sourceTree = "<group>"; };
@@ -64,6 +66,10 @@
 		AD7AFA542836189F00399704 /* Array+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Extensions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		3A4BBDF52D046CF00052E9D8 /* MovieQuizTests */ = {isa = PBXFileSystemSynchronizedRootGroup; explicitFileTypes = {}; explicitFolders = (); path = MovieQuizTests; sourceTree = "<group>"; };
+/* End PBXFileSystemSynchronizedRootGroup section */
+
 /* Begin PBXFrameworksBuildPhase section */
 		AD1ABAAB2831907B00B3E448 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
@@ -91,6 +97,7 @@
 		6113423A2B701CF8003FC2A4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3A17F8502D04863600304FE2 /* NetWorkProtocol.swift */,
 				3ACCB4172D01B6FE00EBFE85 /* MoviesLoader.swift */,
 				3A079EB12D00E5B00035422D /* NetworkClient.swift */,
 				3AC3EB242CEC9A0100000E55 /* StatisticService.swift */,
@@ -128,6 +135,7 @@
 			isa = PBXGroup;
 			children = (
 				AD1ABAB02831907B00B3E448 /* MovieQuiz */,
+				3A4BBDF52D046CF00052E9D8 /* MovieQuizTests */,
 				AD1ABAAF2831907B00B3E448 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -191,7 +199,7 @@
 			isa = PBXProject;
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
-				LastSwiftUpdateCheck = 1330;
+				LastSwiftUpdateCheck = 1600;
 				LastUpgradeCheck = 1520;
 				ORGANIZATIONNAME = "";
 				TargetAttributes = {
@@ -258,6 +266,7 @@
 				3ACDE8F62CDD2009009F0467 /* QuizResultsViewModel.swift in Sources */,
 				AD1ABAB42831907B00B3E448 /* SceneDelegate.swift in Sources */,
 				3AC3EB252CEC9A1400000E55 /* StatisticService.swift in Sources */,
+				3A17F8512D04864000304FE2 /* NetWorkProtocol.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
