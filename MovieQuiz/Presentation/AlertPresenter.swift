@@ -20,13 +20,16 @@ class AlertPresenter {
     
     // MARK: - Public Methods
     func showAlert(model: AlertModel) {
-        let alert = UIAlertController(title: model.tittle, message: model.message, preferredStyle: .alert)
-    
-      
-    let action = UIAlertAction(title: model.buttonText, style: .default) {_ in model.completion?()
-    }
+        let alert = UIAlertController(title: model.tittle,
+                                      message: model.message,
+                                      preferredStyle: .alert)
         
-    alert.addAction(action)
-    viewController?.present(alert, animated: true, completion: nil)
-}
+        
+        let action = UIAlertAction(title: model.buttonText,
+                                   style: .default) {_ in model.completion?()
+        }
+        
+        alert.addAction(action)
+        viewController?.present(alert, animated: true, completion: nil)
+    }
 }

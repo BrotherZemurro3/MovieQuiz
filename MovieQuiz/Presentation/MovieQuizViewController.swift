@@ -24,14 +24,16 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let questionFactory = QuestionFactory(delegate: self)
+        let questionFactory = QuestionFactory(moviesLoader: MoviesLoader(), delegate: self)
         self.questionFactory = questionFactory
         questionFactory.requestNextQuestion()
         alertPresenter = AlertPresenter(viewController: self)
         imageView.layer.masksToBounds = true
         imageView.layer.borderColor = UIColor.white.cgColor
         imageView.layer.cornerRadius = 20
-        
+        statisticService = StatisticService()
+        showLoadingIndicator()
+        questionFactory.loadData()
     }
     
     // MARK: - IB Outlets
@@ -41,7 +43,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     @IBOutlet weak private var imageView: UIImageView!
     @IBOutlet weak private var questionTitle: UILabel!
     @IBOutlet weak private var counterLabel: UILabel!
-    
+    @IBOutlet weak private var activityIndicator: UIActivityIndicatorView!
     
     
     // MARK: Private Properties
@@ -52,7 +54,7 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
     private var currentQuestion: QuizQuestion?
     private var statisticService = StatisticService()
     private var alertPresenter: AlertPresenter?
-  
+    
     
     
     
@@ -105,41 +107,70 @@ final class MovieQuizViewController: UIViewController, QuestionFactoryDelegate {
         imageView.layer.borderColor = UIColor.clear.cgColor
         changeStateButton(isEnabled: true)
         if currentQuestionIndex == questionsAmount - 1 {
-                   statisticService.store(correct: correctAnswers, total: questionsAmount)
-                   let alertModel = AlertModel(
-                    tittle: "Этот раунд окончен!",
-                       message: correctAnswers == questionsAmount ? "Поздравляем, Вы ответили на 10 из 10!" :  "Ваш результат \(correctAnswers)/\(questionsAmount)\nКоличество сыгранных квизов: \(statisticService.gamesCount)\nРекорд: \(statisticService.bestGame.correct)/\(statisticService.bestGame.total) (\(statisticService.bestGame.date.dateTimeString))\nСредняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%",
-                       buttonText: "Попробовать ещё раз",
-                       completion: {[weak self] in
-                           self?.currentQuestionIndex = 0
-                           self?.correctAnswers = 0
-                           self?.questionFactory?.requestNextQuestion()
-                       })
-                   
+            statisticService.store(correct: correctAnswers, total: questionsAmount)
+            let alertModel = AlertModel(
+                tittle: "Этот раунд окончен!",
+                message: correctAnswers == questionsAmount ? "Поздравляем, Вы ответили на 10 из 10!" :  "Ваш результат \(correctAnswers)/\(questionsAmount)\nКоличество сыгранных квизов: \(statisticService.gamesCount)\nРекорд: \(statisticService.bestGame.correct)/\(statisticService.bestGame.total) (\(statisticService.bestGame.date.dateTimeString))\nСредняя точность: \(String(format: "%.2f", statisticService.totalAccuracy))%",
+                buttonText: "Попробовать ещё раз",
+                completion: {[weak self] in
+                    self?.currentQuestionIndex = 0
+                    self?.correctAnswers = 0
+                    self?.questionFactory?.requestNextQuestion()
+                })
+            
             alertPresenter?.showAlert(model: alertModel)
-               } else {
-                   currentQuestionIndex += 1
-                   
+        } else {
+            currentQuestionIndex += 1
+            
             self.questionFactory?.requestNextQuestion()
-           
+            
         }
     }
     
     private func convert(model: QuizQuestion) -> QuizStepViewModel {
         let questionStep = QuizStepViewModel(
-            image: UIImage(named: model.image) ?? UIImage(),
+            image: UIImage(data: model.image) ?? UIImage(),
             question: model.text,
             questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
         return questionStep
     }
     
-// MARK: - changeStateButton
+    private func showLoadingIndicator() {
+        activityIndicator.isHidden = false // говорим, что индикатор загрузки не скрыт
+        activityIndicator.startAnimating() // включаем анимацию
+    }
+    
+    private func showNetworkError(message: String) {
+        activityIndicator.isHidden = true
+        
+        let model = AlertModel(tittle: "Ошибка",
+                               message: "Не удалось получить данные с сервера",
+                               buttonText: "Повторить?") { [weak self] in
+            guard let self = self else {return}
+            self.currentQuestionIndex = 0
+            self.correctAnswers = 0
+            
+            self.questionFactory?.requestNextQuestion()
+        }
+        alertPresenter?.showAlert(model: model)
+    }
+    
+    func didLoadDataFromServer() {
+        activityIndicator.isHidden = true
+        questionFactory?.requestNextQuestion()
+        
+    }
+    
+    func didFailToLoadData(with error: Error) {
+        activityIndicator.isHidden = false
+        let errorMessage  = (error as NSError).localizedDescription
+        showNetworkError(message: errorMessage)
+        
+    }
+    // MARK: - changeStateButton
     private func changeStateButton(isEnabled: Bool) {
         noButton.isEnabled = isEnabled
         yesButton.isEnabled = isEnabled
     }
     
 }
-
-
-

@@ -11,5 +11,5 @@ import Foundation
 // MARK: - QuestionFactoryProtocol
 
 protocol QuestionFactoryProtocol {
-    func requestNextQuestion() 
+    func requestNextQuestion()
 }
