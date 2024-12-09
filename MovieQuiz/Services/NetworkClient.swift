@@ -9,12 +9,11 @@
 import UIKit
 import Foundation
 
-struct NetworkClient {
-    
+struct NetworkClient: NetworkRouting {
+  
     private enum NetworkError: Error {
         case codeError
     }
-    
     func fetch(url: URL, handler: @escaping (Result<Data, Error>) -> Void) {
         let request = URLRequest(url: url)
         
@@ -25,18 +24,18 @@ struct NetworkClient {
                 return
             }
             
-            // Проверяем, что нам пришёл успешный код ответа
             if let response = response as? HTTPURLResponse,
                response.statusCode < 200 || response.statusCode >= 300 {
-                handler(.failure(NetworkError.codeError))
+                handler(.failure(NSError(domain: "", code: response.statusCode, userInfo: nil)))
                 return
             }
             
-            // Возвращаем данные
-            guard let data = data else { return }
+            guard let data = data else {
+                handler(.failure(NSError(domain: "", code: -1, userInfo: nil)))
+                return
+            }
             handler(.success(data))
         }
-        
         task.resume()
     }
 }

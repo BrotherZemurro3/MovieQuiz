@@ -1,12 +1,13 @@
 //
-//  NetWorkProtocol.swift
+//  NetworkRouting.swift
 //  MovieQuiz
 //
-//  Created by Дионисий Коневиченко on 07.12.2024.
+//  Created by Дионисий Коневиченко on 08.12.2024.
 //
 
-import UIKit
+
 import Foundation
+import UIKit
 
 protocol NetworkRouting {
     func fetch (url: URL, handler: @escaping (Result<Data, Error>) -> Void)

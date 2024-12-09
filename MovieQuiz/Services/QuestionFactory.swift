@@ -10,64 +10,17 @@ import UIKit
 // MARK: - QuestionFactory
 
 final class QuestionFactory: QuestionFactoryProtocol {
-    private let moviesLoader: MoviesLoading
+    private let moviesLoader: MoviesLoadingProtocol
     private weak var delegate: QuestionFactoryDelegate?
     private var movies: [MostPopularMovie] = []
     
     // MARK: - QuestionFactoryInitializer
-    init(moviesLoader: MoviesLoading, delegate: QuestionFactoryDelegate?){
+    init(moviesLoader: MoviesLoadingProtocol, delegate: QuestionFactoryDelegate?){
         self.moviesLoader = moviesLoader
         self.delegate = delegate
     }
     
-    // MARK: - ArrayOfQuizQuestions
-    /*   let questions: [QuizQuestion] = [
-     
-     QuizQuestion(
-     image: "The Godfather",
-     text: "Рейтинг данного фильма больше чем 6?",
-     correctAnswer: true),
-     QuizQuestion(
-     image: "The Dark Knight",
-     text: "Рейтинг данного фильма больше чем 6?",
-     correctAnswer: true),
-     QuizQuestion(
-     image: "Kill Bill",
-     text: "Рейтинг данного фильма больше чем 6?",
-     correctAnswer: true),
-     QuizQuestion(
-     image: "The Avengers",
-     text: "Рейтинг данного фильма больше чем 6?",
-     correctAnswer: true),
-     QuizQuestion(
-     image: "Deadpool",
-     text: "Рейтинг данного фильма больше чем 6?",
-     correctAnswer: true),
-     QuizQuestion(
-     image: "The Green Knight",
-     text: "Рейтинг данного фильма больше чем 6?",
-     correctAnswer: true),
-     QuizQuestion(
-     image: "Old",
-     text: "Рейтинг данного фильма больше чем 6?",
-     correctAnswer: false),
-     QuizQuestion(
-     image: "The Ice Age Adventures of Buck Wild",
-     text: "Рейтинг данного фильма больше чем 6?",
-     correctAnswer: false),
-     QuizQuestion(
-     image: "Tesla",
-     text: "Рейтинг данного фильма больше чем 6?",
-     correctAnswer: false),
-     QuizQuestion(
-     image: "Vivarium",
-     text: "Рейтинг данного фильма больше чем 6?",
-     correctAnswer: false)
-     ]
-     */
-    
-    
-    
+
     func loadData() {
         moviesLoader.loadMovies { [weak self] result in
             DispatchQueue.main.async {

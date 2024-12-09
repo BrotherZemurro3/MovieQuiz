@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A079EB22D00E5B90035422D /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A079EB12D00E5B00035422D /* NetworkClient.swift */; };
-		3A17F8512D04864000304FE2 /* NetWorkProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A17F8502D04863600304FE2 /* NetWorkProtocol.swift */; };
+		3A112D782D05C44A009D2909 /* NetworkRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A112D772D05C44A009D2909 /* NetworkRouting.swift */; };
 		3A23F6782CC1158C00975F70 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F6772CC1158C00975F70 /* YS Display-Medium.ttf */; };
 		3A23F6792CC1158C00975F70 /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F6762CC1158C00975F70 /* YS Display-Bold.ttf */; };
 		3A61A4EF2CEB527D00C109A0 /* AlertModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A61A4EE2CEB527900C109A0 /* AlertModel.swift */; };
@@ -47,7 +47,7 @@
 
 /* Begin PBXFileReference section */
 		3A079EB12D00E5B00035422D /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
-		3A17F8502D04863600304FE2 /* NetWorkProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetWorkProtocol.swift; sourceTree = "<group>"; };
+		3A112D772D05C44A009D2909 /* NetworkRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouting.swift; sourceTree = "<group>"; };
 		3A17F8572D05B44100304FE2 /* MovieQuizUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieQuizUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A23F6762CC1158C00975F70 /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
 		3A23F6772CC1158C00975F70 /* YS Display-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Medium.ttf"; sourceTree = "<group>"; };
@@ -116,7 +116,7 @@
 		6113423A2B701CF8003FC2A4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				3A17F8502D04863600304FE2 /* NetWorkProtocol.swift */,
+				3A112D772D05C44A009D2909 /* NetworkRouting.swift */,
 				3ACCB4172D01B6FE00EBFE85 /* MoviesLoader.swift */,
 				3A079EB12D00E5B00035422D /* NetworkClient.swift */,
 				3AC3EB242CEC9A0100000E55 /* StatisticService.swift */,
@@ -329,7 +329,7 @@
 				3ACDE8F62CDD2009009F0467 /* QuizResultsViewModel.swift in Sources */,
 				AD1ABAB42831907B00B3E448 /* SceneDelegate.swift in Sources */,
 				3AC3EB252CEC9A1400000E55 /* StatisticService.swift in Sources */,
-				3A17F8512D04864000304FE2 /* NetWorkProtocol.swift in Sources */,
+				3A112D782D05C44A009D2909 /* NetworkRouting.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
