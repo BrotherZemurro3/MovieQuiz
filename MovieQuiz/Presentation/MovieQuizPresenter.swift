@@ -10,9 +10,19 @@ import Foundation
 
 final class MovieQuizPresenter {
     
-   let questionsAmount: Int = 10
- var currentQuestionIndex: Int = 0
+let questionsAmount: Int = 10
+var currentQuestionIndex: Int = 0
+var currentQuestion: QuizQuestion?
+    weak var viewController: MovieQuizViewController?
     
+    func yesButtonClicked(_ sender: UIButton) {
+        guard let currentQuestion = currentQuestion else {
+            return
+        }
+        let givenAnswer = true
+        
+        viewController?.showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+    }
     func isLastQuestion() -> Bool {
         currentQuestionIndex == questionsAmount - 1
     }
@@ -29,5 +39,6 @@ final class MovieQuizPresenter {
             questionNumber: "\(currentQuestionIndex + 1)/\(questionsAmount)")
        
     }
+
     
 }
