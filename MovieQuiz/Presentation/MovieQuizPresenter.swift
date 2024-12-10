@@ -23,6 +23,15 @@ var currentQuestion: QuizQuestion?
         
         viewController?.showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
     }
+    
+    func noButtonClicked(_ sender: UIButton) {
+        guard let currentQuestion = currentQuestion else {
+            return
+        }
+        let givenAnswer = false
+        
+        viewController?.showAnswerResult(isCorrect: givenAnswer == currentQuestion.correctAnswer)
+    }
     func isLastQuestion() -> Bool {
         currentQuestionIndex == questionsAmount - 1
     }
