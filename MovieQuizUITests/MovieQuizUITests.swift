@@ -6,7 +6,9 @@
 //
 
 import XCTest
-
+import UIKit
+import Foundation
+@testable import MovieQuiz
  class MovieQuizUITests: XCTestCase {
     
     var app: XCUIApplication!
