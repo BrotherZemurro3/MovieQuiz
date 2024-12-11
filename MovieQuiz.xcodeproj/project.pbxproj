@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3A079EB22D00E5B90035422D /* NetworkClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A079EB12D00E5B00035422D /* NetworkClient.swift */; };
+		3A0820CC2D0A1AC6009E8E5B /* MovieQuizViewControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A0820CB2D0A1AB1009E8E5B /* MovieQuizViewControllerProtocol.swift */; };
 		3A112D782D05C44A009D2909 /* NetworkRouting.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3A112D772D05C44A009D2909 /* NetworkRouting.swift */; };
 		3A23F6782CC1158C00975F70 /* YS Display-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F6772CC1158C00975F70 /* YS Display-Medium.ttf */; };
 		3A23F6792CC1158C00975F70 /* YS Display-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 3A23F6762CC1158C00975F70 /* YS Display-Bold.ttf */; };
@@ -48,6 +49,7 @@
 
 /* Begin PBXFileReference section */
 		3A079EB12D00E5B00035422D /* NetworkClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkClient.swift; sourceTree = "<group>"; };
+		3A0820CB2D0A1AB1009E8E5B /* MovieQuizViewControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MovieQuizViewControllerProtocol.swift; sourceTree = "<group>"; };
 		3A112D772D05C44A009D2909 /* NetworkRouting.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkRouting.swift; sourceTree = "<group>"; };
 		3A17F8572D05B44100304FE2 /* MovieQuizUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = MovieQuizUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A23F6762CC1158C00975F70 /* YS Display-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "YS Display-Bold.ttf"; sourceTree = "<group>"; };
@@ -118,6 +120,7 @@
 		6113423A2B701CF8003FC2A4 /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				3A0820CB2D0A1AB1009E8E5B /* MovieQuizViewControllerProtocol.swift */,
 				3A112D772D05C44A009D2909 /* NetworkRouting.swift */,
 				3ACCB4172D01B6FE00EBFE85 /* MoviesLoader.swift */,
 				3A079EB12D00E5B00035422D /* NetworkClient.swift */,
@@ -320,6 +323,7 @@
 				AD7AFA552836189F00399704 /* Array+Extensions.swift in Sources */,
 				3AC3EB232CEC98AD00000E55 /* GameResult.swift in Sources */,
 				3A079EB22D00E5B90035422D /* NetworkClient.swift in Sources */,
+				3A0820CC2D0A1AC6009E8E5B /* MovieQuizViewControllerProtocol.swift in Sources */,
 				3ACCB4182D01B70600EBFE85 /* MoviesLoader.swift in Sources */,
 				3AC576572CDE9AE8008B648C /* QuestionFactoryProtocol.swift in Sources */,
 				3AC576592CE0C360008B648C /* QuestionFactoryDelegate.swift in Sources */,

@@ -4,7 +4,7 @@ import Foundation
 // MARK: - MovieQuizViewController
 
 
-final class MovieQuizViewController: UIViewController {
+final class MovieQuizViewController: UIViewController, MovieQuizViewControllerProtocol {
     
     private var presenter: MovieQuizPresenter!
     // MARK: - Lifecycle
