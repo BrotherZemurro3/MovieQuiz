@@ -2,20 +2,15 @@ import UIKit
 import Foundation
 
 // MARK: - MovieQuizViewController
-
-
 final class MovieQuizViewController: UIViewController, MovieQuizViewControllerProtocol {
     
     private var presenter: MovieQuizPresenter!
     // MARK: - Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         presenter = MovieQuizPresenter(viewController: self)
         imageView.layer.cornerRadius = 20
-        
     }
-    
     // MARK: - IB Outlets
     @IBOutlet weak private var noButton: UIButton!
     @IBOutlet weak private var yesButton: UIButton!
@@ -35,11 +30,9 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
         blockStateOfButton()
         presenter.noButtonClicked()
     }
-    
-
     // MARK: - stateOfButtons
     
-     func blockStateOfButton() {
+    func blockStateOfButton() {
         yesButton.isEnabled = false
         noButton.isEnabled = false
     }
@@ -49,10 +42,10 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
         noButton.isEnabled = true
     }
     
-    // MARK: - Private Methods
+    // MARK: - Methods
     func showLoadingIndicator() {
-        activityIndicator.isHidden = false // говорим, что индикатор загрузки не скрыт
-        activityIndicator.startAnimating() // включаем анимацию
+        activityIndicator.isHidden = false
+        activityIndicator.startAnimating()
     }
     func changeStateButton(isEnabled: Bool) {
         noButton.isEnabled = isEnabled
@@ -96,26 +89,21 @@ final class MovieQuizViewController: UIViewController, MovieQuizViewControllerPr
         
         self.present(alert, animated: true, completion: nil)
     }
-    
-    
-    
     func showNetworkError(message: String) {
-         hideLoadingIndicator()
-
-         let alert = UIAlertController(
-             title: "Ошибка",
-             message: message,
-             preferredStyle: .alert)
-
-             let action = UIAlertAction(title: "Попробовать ещё раз",
-             style: .default) { [weak self] _ in
-                 guard let self = self else { return }
-
-                 self.presenter.restartGame()
-             }
-
-         alert.addAction(action)
-     }
- }
-    
-
+        hideLoadingIndicator()
+        
+        let alert = UIAlertController(
+            title: "Ошибка",
+            message: message,
+            preferredStyle: .alert)
+        
+        let action = UIAlertAction(title: "Попробовать ещё раз",
+                                   style: .default) { [weak self] _ in
+            guard let self = self else { return }
+            
+            self.presenter.restartGame()
+        }
+        
+        alert.addAction(action)
+    }
+}

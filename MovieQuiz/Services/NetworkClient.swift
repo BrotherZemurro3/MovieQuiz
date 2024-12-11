@@ -10,7 +10,7 @@ import UIKit
 import Foundation
 
 struct NetworkClient: NetworkRouting {
-  
+    
     private enum NetworkError: Error {
         case codeError
     }
@@ -18,7 +18,6 @@ struct NetworkClient: NetworkRouting {
         let request = URLRequest(url: url)
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
-            // Проверяем, пришла ли ошибка
             if let error = error {
                 handler(.failure(error))
                 return
