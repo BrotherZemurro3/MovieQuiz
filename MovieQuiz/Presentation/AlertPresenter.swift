@@ -11,10 +11,11 @@ import UIKit
 // MARK: - AlertPresenter
 class AlertPresenter {
     private weak var viewController: UIViewController?
-    private let presenter = MovieQuizPresenter()
+    private let presenter: MovieQuizPresenter
     // MARK: - Initializer
-    init(viewController: UIViewController? = nil) {
+    init(viewController: UIViewController, presenter: MovieQuizPresenter) {
         self.viewController = viewController
+        self.presenter = presenter
     }
     
     
@@ -25,8 +26,10 @@ class AlertPresenter {
                                       preferredStyle: .alert)
         
         
-        let action = UIAlertAction(title: model.buttonText, style: .default) {_ in
-                  model.completion?()
+        let action = UIAlertAction(title: model.buttonText,
+                                   style: .default) {_ in model.completion?()
+            self.presenter.restartGame()
+            
         }
         
         alert.addAction(action)
