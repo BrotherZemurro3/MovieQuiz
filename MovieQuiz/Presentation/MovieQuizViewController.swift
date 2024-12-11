@@ -20,29 +20,31 @@ final class MovieQuizViewController: UIViewController {
     @IBOutlet weak private var noButton: UIButton!
     @IBOutlet weak private var yesButton: UIButton!
     @IBOutlet weak private var textLabel: UILabel!
-    @IBOutlet weak private var imageView: UIImageView!
+    @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak private var questionTitle: UILabel!
     @IBOutlet weak private var counterLabel: UILabel!
     @IBOutlet weak private var activityIndicator: UIActivityIndicatorView!
     
     // MARK: - IB Actions
     @IBAction private func yesButtonClicked(_ sender: UIButton) {
+        blockStateOfButton()
         presenter.yesButtonClicked()
     }
     
     @IBAction private func noButtonClicked(_ sender: UIButton) {
+        blockStateOfButton()
         presenter.noButtonClicked()
     }
     
 
-    // MARK: stateOfButtons
+    // MARK: - stateOfButtons
     
-    private func blockStateOfButtons() {
+     func blockStateOfButton() {
         yesButton.isEnabled = false
         noButton.isEnabled = false
     }
     
-    private func unlockStateOfButtons() {
+    func unlockStateOfButton() {
         yesButton.isEnabled = true
         noButton.isEnabled = true
     }

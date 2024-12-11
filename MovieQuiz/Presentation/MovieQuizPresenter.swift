@@ -56,6 +56,7 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
     }
 
     func didAnswer(isCorrectAnswer: Bool) {
+        viewController?.blockStateOfButton()
         if isCorrectAnswer {
             correctAnswers += 1
         }
@@ -87,7 +88,8 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         didAnswer(isYes: false)
     }
 
-    private func didAnswer(isYes: Bool) {
+    func didAnswer(isYes: Bool) {
+        viewController?.blockStateOfButton()
         guard let currentQuestion = currentQuestion else {
             return
         }
@@ -97,14 +99,17 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
         proceedWithAnswer(isCorrect: givenAnswer == currentQuestion.correctAnswer)
     }
 
-    private func proceedWithAnswer(isCorrect: Bool) {
+    func proceedWithAnswer(isCorrect: Bool) {
         didAnswer(isCorrectAnswer: isCorrect)
-
         viewController?.highlightImageBorder(isCorrectAnswer: isCorrect)
-
+        viewController?.imageView.layer.borderWidth = 8
+        viewController?.imageView.layer.masksToBounds = true
+        
         DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) { [weak self] in
             guard let self = self else { return }
             self.proceedToNextQuestionOrResults()
+            viewController?.imageView.layer.borderWidth = 0
+            viewController?.imageView.layer.borderColor = UIColor.clear.cgColor
         }
     }
 
@@ -119,9 +124,11 @@ final class MovieQuizPresenter: QuestionFactoryDelegate {
                 text: text,
                 buttonText: "Сыграть ещё раз")
                 viewController?.show(quiz: viewModel)
+                viewController?.unlockStateOfButton()
         } else {
             self.switchToNextQuestion()
             questionFactory?.requestNextQuestion()
+            self.viewController?.unlockStateOfButton()
         }
     }
 
