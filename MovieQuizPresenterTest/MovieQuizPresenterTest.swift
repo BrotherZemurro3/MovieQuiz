@@ -1,6 +1,6 @@
 //
-//   MovieQuizPresenterTests.swift
-//  MovieQuiz
+//  MovieQuizPresenterTest.swift
+//  MovieQuizPresenterTest
 //
 //  Created by Дионисий Коневиченко on 11.12.2024.
 //
@@ -9,38 +9,34 @@ import XCTest
 @testable import MovieQuiz
 
 final class MovieQuizViewControllerMock: MovieQuizViewControllerProtocol {
-    func show(quiz step: QuizStepViewModel) {
-        
+    var imageView: UIImageView! {
+        return UIImageView()
     }
     
-    func show(quiz result: QuizResultsViewModel) {
-        
-    }
-    func highlightImageBorder(isCorrectAnswer: Bool) {
-        
-    }
-    func showLoadingIndicator() {
-        
-    }
-    func hideLoadingIndicator() {
-        
-    }
-    func showNetworkError(message: String) {
-        
-    }
+    func showLoadingIndicator() {}
+    func hideLoadingIndicator() {}
+    func showNetworkError(message: String) {}
+    func show(quiz: QuizStepViewModel) {}
+    func show(quiz: QuizResultsViewModel) {}
+    func blockStateOfButton() {}
+    func unlockStateOfButton() {}
+    func highlightImageBorder(isCorrectAnswer: Bool) {}
 }
 
 final class MovieQuizPresenterTests: XCTestCase {
     func testPresenterConvertModel() throws {
         let viewControllerMock = MovieQuizViewControllerMock()
-        let sut = MovieQuizPresenterTests(viewController: viewControllerMock)
+        let sut = MovieQuizPresenter(viewController: viewControllerMock)
         
         let emptyData = Data()
         let question = QuizQuestion(image: emptyData, text: "Question Text", correctAnswer: true)
-        let viewModel = sut.convert(model:question)
+        let viewModel = sut.convert(model: question)
         
-        XCTAssertNotNil(viewModel.image)
+         XCTAssertNotNil(viewModel.image)
         XCTAssertEqual(viewModel.question, "Question Text")
         XCTAssertEqual(viewModel.questionNumber, "1/10")
     }
-}
+} 
+    
+    
+
