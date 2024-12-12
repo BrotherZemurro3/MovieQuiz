@@ -20,14 +20,14 @@ class AlertPresenter {
         let alert = UIAlertController(title: model.tittle,
                                       message: model.message,
                                       preferredStyle: .alert)
-        
+        alert.view.accessibilityIdentifier = "Game results"
         
         let action = UIAlertAction(title: model.buttonText,
                                    style: .default) {_ in model.completion?()
             self.presenter.restartGame()
             
         }
-        
+        action.accessibilityIdentifier = "ReplayButton"
         alert.addAction(action)
         viewController?.present(alert, animated: true, completion: nil)
     }

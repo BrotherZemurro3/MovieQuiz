@@ -2,13 +2,11 @@
 //  ArrayTests.swift
 //  MovieQuiz
 //
-//  Created by Дионисий Коневиченко on 07.12.2024.
+//  Created by Дионисий Коневиченко on 12.12.2024.
 //
 
-import UIKit
-import Foundation
 import XCTest
-@testable import MovieQuiz 
+@testable import MovieQuiz
 
 class ArrayTests: XCTestCase {
     func testGetValueInRange() throws {
@@ -23,7 +21,8 @@ class ArrayTests: XCTestCase {
         XCTAssertEqual(value,2)
         
     }
-    func testGetValueOutOfRange() throws {
+    
+    func testGetValueOutOfRangeTests() throws {
         // Given
         let array = [1,1,2,3,5]
         // When

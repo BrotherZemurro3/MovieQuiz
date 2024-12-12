@@ -2,9 +2,8 @@
 //  MovieQuizUITests.swift
 //  MovieQuizUITests
 //
-//  Created by Дионисий Коневиченко on 08.12.2024.
+//  Created by Дионисий Коневиченко on 12.12.2024.
 //
-
 import XCTest
 @testable import MovieQuiz
 final class MovieQuizUITests: XCTestCase {
@@ -29,7 +28,7 @@ final class MovieQuizUITests: XCTestCase {
     
     func testYesButton() {
         sleep(3)
-        let firstPoster = app.images["Poster"] 
+        let firstPoster = app.images["Poster"]
         let firstPosterData = firstPoster.screenshot().pngRepresentation
         
         app.buttons["Yes"].tap()
@@ -55,20 +54,21 @@ final class MovieQuizUITests: XCTestCase {
         let indexLabel = app.staticTexts["Index"]
         
         XCTAssertEqual(indexLabel.label, "2/10")
-        
-        func AlertTest() throws {
+    }
+    
+        func testAlert() throws {
             sleep(3)
             for _ in 1...10 {
-                app.buttons["No"].tap()
+                app.buttons["No"].tap ()
                 sleep(3)
             }
             let alert = app.alerts["Game results"]
+            
             XCTAssertTrue(alert.exists)
-            XCTAssertTrue(alert.label == "Этот раунд окончен")
-            XCTAssertTrue(alert.buttons.firstMatch.label == "Сыграть еще раз")
+            XCTAssertTrue(alert.label == "Этот раунд окончен!")
+            XCTAssertTrue(alert.buttons.firstMatch.label == "Сыграть ещё раз")
         }
-        
-        func AlertDismissTest() throws {
+        func testAlertDismiss() throws {
             sleep(3)
             for _ in 1...10 {
                 app.buttons["No"].tap()
@@ -82,7 +82,4 @@ final class MovieQuizUITests: XCTestCase {
             XCTAssertTrue(indexLabel.label == "1/10")
         }
     }
-}
-
-
 
