@@ -58,7 +58,7 @@ final class StatisticService: StatisticServiceProtocol {
     }
     
     
-    // MARK: - storeGameStatistic 
+    // MARK: - storeGameStatistic
     func store(correct count: Int, total amount: Int) {
         let newCorrect = storage.integer(forKey: Keys.correctAnswers.rawValue) + count
         let newTotal = storage.integer(forKey: Keys.totalQuestion.rawValue) + amount
